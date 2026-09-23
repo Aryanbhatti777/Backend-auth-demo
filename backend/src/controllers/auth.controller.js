@@ -1,8 +1,8 @@
-import userModel from "../models/user.model";
-import { generateTokens } from "../utils/utils";
+import userModel from "../models/user.model.js";
+import { generateTokens } from "../utils/utils.js";
+import bcrypt from "bcryptjs"
 
-
-const register = async (req, res) => {
+export const register = async (req, res) => {
 
     const { name, email, password } = req.body;
     
@@ -41,10 +41,7 @@ const register = async (req, res) => {
 
         return res.status(201).json({
             message: "user created successfully",
-            user: {
-                name: user.name,
-                email: user.email
-            },
+            user,
             accessToken
         })
 
