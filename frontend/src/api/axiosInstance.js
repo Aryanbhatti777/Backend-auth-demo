@@ -15,6 +15,22 @@ const useApi = () => {
 
         return config
     })
+
+    api.interceptors.response.use(
+        response => response,
+        async (error) => {
+            if (error.response && error.response.status === 401 || 500) {
+                
+                const res = await axios.get('/api/auth/refresh');
+                
+                setAccessToken(res.data.accessToken);
+
+                error.config.headers.Authorization = `Bearer ${res.data.accessToken}`
+            }
+        
+            return Promise.reject(error)
+        }
+    )
  
     return api
 }

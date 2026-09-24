@@ -5,7 +5,7 @@ import useApi from '../api/axiosInstance';
 
 const Profile = () => {
 
-    const { user, setUser } = useContext(AuthContext)
+    const { user, setUser, accessToken } = useContext(AuthContext)
     const api = useApi();
 
     const getProfile = async () => {
@@ -20,7 +20,7 @@ const Profile = () => {
 
     useEffect(() => {
         getProfile()
-    },[])
+    },[accessToken])
   return (
       <>
           <div>
