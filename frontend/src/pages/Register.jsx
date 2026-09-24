@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react'
-import api from '../api/axiosInstance'
+
 import{ AuthContext } from '../context/AuthContext'
 import { useNavigate } from 'react-router'
+import useApi from '../api/axiosInstance'
 
 
 const Register = () => {
@@ -11,6 +12,7 @@ const Register = () => {
     const [password, setPassword] = useState("")
     const { user, accessToken, setUser, setAccessToken } = useContext(AuthContext)
     const navigate = useNavigate()
+    const api = useApi();
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -18,14 +20,11 @@ const Register = () => {
         try {
             const res = await api.post("/auth/register", { name, email, password })
             setAccessToken(res.data.accessToken)
-            setUser(res.data.user)
             navigate("/profile")
         } catch (error) {
             console.log(error)
         }
-    }
-
-    console.log(user, accessToken)
+    }  
 
 
   return (

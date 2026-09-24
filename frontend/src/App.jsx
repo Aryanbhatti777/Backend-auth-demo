@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router"
 import Register from "./pages/Register";
+import Profile from "./pages/Profile";
 
 
 function App() {
@@ -9,6 +10,10 @@ function App() {
     {
       path: "/",
       element: <Register/>
+    },
+    {
+      path: "/profile",
+      element: <Profile/>
     }
   ]);
 
